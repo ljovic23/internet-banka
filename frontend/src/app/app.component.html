@@ -1,0 +1,30 @@
+<header class="navbar">
+  <div class="navbar-inner">
+    <div class="brand">💳 Internet Banka</div>
+
+    <nav class="nav">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Početna</a>
+      <a routerLink="/accounts" routerLinkActive="active">Računi</a>
+      <a routerLink="/transfer" routerLinkActive="active">Prijenos</a>
+    </nav>
+
+    <div class="spacer"></div>
+
+    <button class="btn" (click)="toggleTheme()">{{ theme==='dark' ? '🌙 Dark' : '☀️ Light' }}</button>
+
+    <ng-container *ngIf="isAuthed(); else loginLink">
+      <button class="btn btn-ghost" (click)="logout()">Odjava</button>
+    </ng-container>
+    <ng-template #loginLink>
+      <a routerLink="/login" class="btn btn-primary">Prijava</a>
+    </ng-template>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+
+<app-toasts></app-toasts>
