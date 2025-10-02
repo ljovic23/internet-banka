@@ -9,7 +9,9 @@ frontend/.angular/
 
 # Lokalne baze / tajne
 backend/bank.db
-*.env
+backend/.env
+frontend/.env
+.env
 
 # Logovi
 *.log
