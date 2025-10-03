@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
   private base =
     (typeof window !== 'undefined' && location.hostname !== 'localhost')
-      ? 'https://YOUR-RENDER-URL.onrender.com'  // <-- zamijeni nakon deploya backenda
+      ? 'https://endearing-valkyrie-86d278.netlify.app'  // <-- zamijeni nakon deploya backenda
       : '/api';
 
   constructor(private http: HttpClient) {}
