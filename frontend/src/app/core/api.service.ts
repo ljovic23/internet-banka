@@ -5,10 +5,11 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
   private base =
     (typeof window !== 'undefined' && location.hostname !== 'localhost')
-      ? 'https://endearing-valkyrie-86d278.netlify.app'  // <-- zamijeni nakon deploya backenda
+      ? 'https://endearing-valkyrie-86d278.netlify.app'   
       : '/api';
 
   constructor(private http: HttpClient) {}
+
   get<T>(url: string)  { return this.http.get<T>(this.base + url); }
   post<T>(url: string, body: any) { return this.http.post<T>(this.base + url, body); }
 }
