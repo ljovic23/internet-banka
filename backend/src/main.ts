@@ -4,7 +4,6 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Dozvoljeni frontend origin-i (lokalni + Netlify)
   const allowedOrigins = [
     'http://localhost:4200',
     'https://endearing-valkyrie-86d278.netlify.app',
@@ -12,13 +11,12 @@ async function bootstrap() {
 
   app.enableCors({
     origin(origin, callback) {
-      // bez origin-a (npr. curl) – pusti
-      if (!origin) return callback(null, true);
+      if (!origin) return callback(null, true);                  // curl, health checks…
       if (allowedOrigins.includes(origin)) return callback(null, true);
       return callback(new Error(`CORS blocked: ${origin}`), false);
     },
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET','HEAD','PUT','PATCH','POST','DELETE','OPTIONS'],
+    allowedHeaders: ['Content-Type','Authorization'],
     credentials: false,
     preflightContinue: false,
     optionsSuccessStatus: 204,
@@ -28,5 +26,4 @@ async function bootstrap() {
   await app.listen(port, '0.0.0.0');
   console.log(`API listening on http://0.0.0.0:${port}`);
 }
-
 bootstrap();
