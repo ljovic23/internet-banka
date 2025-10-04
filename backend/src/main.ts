@@ -4,22 +4,22 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Dopušteni frontendovi (lokalni + Netlify)
+  // Dozvoljeni frontend origin-i (lokalni + Netlify)
   const allowedOrigins = [
     'http://localhost:4200',
-    'https://endearing-valkyrie-86d278.netlify.app', // <-- stavi svoj Netlify URL
+    'https://endearing-valkyrie-86d278.netlify.app',
   ];
 
   app.enableCors({
-    origin: (origin, callback) => {
+    origin(origin, callback) {
       // bez origin-a (npr. curl) – pusti
       if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) return callback(null, true);
       return callback(new Error(`CORS blocked: ${origin}`), false);
     },
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders: 'Content-Type, Authorization',
-    credentials: false,                // koristimo Bearer token u headeru
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: false,
     preflightContinue: false,
     optionsSuccessStatus: 204,
   });
