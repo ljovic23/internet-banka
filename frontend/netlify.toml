@@ -1,0 +1,16 @@
+[build]
+  base    = "frontend"
+  publish = "dist/frontend/browser"
+  command = "npm ci && npm run build"
+
+[[redirects]]
+  from = "/*"
+  to   = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "https://internet-banka.onrender.com"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Allow-Methods = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
